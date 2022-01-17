@@ -3,7 +3,7 @@ package ru.job4j.generics;
 public class Animal {
     private String type;
 
-    public Animal(String type) {
+    public Animal(String type){
     this.type = type;
     }
 
