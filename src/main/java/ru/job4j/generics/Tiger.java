@@ -1,7 +1,9 @@
 package ru.job4j.generics;
 
 public class Tiger extends Predator {
-    public Tiger(String type) {
-        super(type);
+    private String kindOfAnimal;
+    public Tiger(String type, String v, String kindOfAnimal) {
+        super(type, v);
+        this.kindOfAnimal = kindOfAnimal;
     }
 }

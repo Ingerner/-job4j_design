@@ -1,9 +1,10 @@
 package ru.job4j.generics;
 
 public class Predator extends Animal {
-
-    public Predator(String type) {
+    private String group;
+    public Predator(String type, String group) {
         super(type);
+        this.group = group;
     }
 }
 
