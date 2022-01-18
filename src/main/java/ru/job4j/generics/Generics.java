@@ -11,7 +11,7 @@ public class Generics {
         List<Predator> second = new ArrayList<>();
         List<Tiger> third = new ArrayList<>();
         first.add(new Animal("звери"));
-        second.add(new Predator("звери", "хищники" ));
+        second.add(new Predator("звери", "хищники"));
         third.add(new Tiger("звери", "хищники", "тигр"));
 
         gen.printObject(first);
