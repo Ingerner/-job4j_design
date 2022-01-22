@@ -1,6 +1,5 @@
 package ru.job4j.list;
 
-
 import java.lang.reflect.Array;
 import java.util.*;
 
@@ -38,7 +37,7 @@ public class SimpleArrayList<T> implements List<T> {
         Objects.checkIndex(index, size);
         modeCount++;
         T delete = container[index];
-        System.arraycopy(container, index + 1, container, index, (size -1) - index);
+        System.arraycopy(container, index + 1, container, index, (size - 1) - index);
         size--;
         return delete;
     }
