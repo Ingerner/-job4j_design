@@ -36,16 +36,10 @@ public class SimpleArrayList<T> implements List<T> {
     public T remove(int index) {
         Objects.checkIndex(index, size);
         modeCount++;
-        T removedElement = container[index];
-        for (int i = index; i < size; i++) {
-            if (i == size - 1) {
-                container[i] = null;
-            } else {
-                container[i] = container[i + 1];
-            }
-        }
+        T delete = container[index];
+        System.arraycopy(container, index + 1, container, index, (size -1) - index);
         size--;
-        return removedElement;
+        return delete;
     }
 
     @Override
@@ -67,7 +61,8 @@ public class SimpleArrayList<T> implements List<T> {
     public Iterator<T> iterator() {
         return new Iterator<T>() {
 
-            private final Iterator<T> data = Arrays.stream(Arrays.copyOf(container, size)).iterator();
+            private final Iterator<T> data = Arrays.stream(
+                    Arrays.copyOf(container, size)).iterator();
             
             final int expectedModeCount = modeCount;
 
