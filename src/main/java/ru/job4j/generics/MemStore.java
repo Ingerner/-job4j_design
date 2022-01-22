@@ -16,7 +16,7 @@ public final class MemStore<T extends Base> implements Store<T> {
     public boolean replace(String id, T model) {
        for (String key : storage.keySet()) {
            if (key.equals(id)) {
-               storage.put(key,model);
+               storage.put(key, model);
                return true;
            }
        }
