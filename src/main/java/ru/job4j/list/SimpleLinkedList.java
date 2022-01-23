@@ -34,8 +34,7 @@ public class SimpleLinkedList<E> implements List1<E> {
             }
             size++;
             modCount++;
-        }
-
+    }
 
     @Override
     public E get(int index) {
