@@ -82,27 +82,5 @@ public class SimpleArrayList<T> implements List<T> {
                 return container[point++];
             }
         };
-
-//            private final Iterator<T> data = Arrays.stream(
-//                    Arrays.copyOf(container, size)).iterator();
-//
-//            final int expectedModeCount = modeCount;
-//
-//            @Override
-//            public boolean hasNext() {
-//                if (expectedModeCount != modeCount) {
-//                    throw new ConcurrentModificationException();
-//                }
-//                return data.hasNext();
-//            }
-//
-//            @Override
-//            public T next() {
-//                if (!hasNext()) {
-//                    throw new NoSuchElementException();
-//                }
-//                return data.next();
-//            }
-//        };
     }
 }
