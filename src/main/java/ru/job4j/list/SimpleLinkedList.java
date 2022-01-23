@@ -2,7 +2,7 @@ package ru.job4j.list;
 
 import java.util.*;
 
-public class SimpleLinkedList<E> implements ListСoherentList<E> {
+public class SimpleLinkedList<E> implements List1<E> {
 
     private  int size;
     private Node<E> first;
@@ -26,10 +26,12 @@ public class SimpleLinkedList<E> implements ListСoherentList<E> {
             final Node<E> lastNode = last;
             final Node<E> newNode = new Node<>(lastNode, value, null);
             last = newNode;
-            if (lastNode == null)
+            if (lastNode == null) {
                 first = newNode;
-            else
+            }
+            else {
                 lastNode.next = newNode;
+            }
             size++;
             modCount++;
         }

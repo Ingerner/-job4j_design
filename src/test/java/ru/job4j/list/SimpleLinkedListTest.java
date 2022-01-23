@@ -5,7 +5,6 @@ import org.junit.Test;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 import static org.junit.Assert.*;
 
@@ -13,7 +12,7 @@ public class SimpleLinkedListTest {
 
     @Test
     public void whenAddAndGet() {
-        ListСoherentList<Integer> list = new SimpleLinkedList<>();
+        List1<Integer> list = new SimpleLinkedList<>();
         list.add(1);
         list.add(2);
         assertThat(list.get(0), Is.is(1));
@@ -22,7 +21,7 @@ public class SimpleLinkedListTest {
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void whenGetFromOutOfBoundThenExceptionThrown() {
-        ListСoherentList<Integer> list = new SimpleLinkedList<>();
+        List1<Integer> list = new SimpleLinkedList<>();
         list.add(1);
         list.add(2);
         list.get(2);
@@ -30,7 +29,7 @@ public class SimpleLinkedListTest {
 
     @Test
     public void whenAddIterHasNextTrue() {
-        ListСoherentList<Integer> list = new SimpleLinkedList<>();
+        List1<Integer> list = new SimpleLinkedList<>();
         list.add(1);
         Iterator<Integer> it = list.iterator();
         assertThat(it.hasNext(), Is.is(true));
@@ -38,7 +37,7 @@ public class SimpleLinkedListTest {
 
     @Test
     public void whenAddIterNextOne() {
-        ListСoherentList<Integer> list = new SimpleLinkedList<>();
+        List1<Integer> list = new SimpleLinkedList<>();
         list.add(1);
         Iterator<Integer> it = list.iterator();
         assertThat(it.next(), Is.is(1));
@@ -46,14 +45,14 @@ public class SimpleLinkedListTest {
 
     @Test
     public void whenEmptyIterHashNextFalse() {
-        ListСoherentList<Integer> list = new SimpleLinkedList<>();
+        List1<Integer> list = new SimpleLinkedList<>();
         Iterator<Integer> it = list.iterator();
         assertThat(it.hasNext(), Is.is(false));
     }
 
     @Test
     public void whenAddIterMultiHasNextTrue() {
-        ListСoherentList<Integer> list = new SimpleLinkedList<>();
+        List1<Integer> list = new SimpleLinkedList<>();
         list.add(1);
         Iterator<Integer> it = list.iterator();
         assertThat(it.hasNext(), Is.is(true));
@@ -62,7 +61,7 @@ public class SimpleLinkedListTest {
 
     @Test
     public void whenAddIterNextOneNextTwo() {
-        ListСoherentList<Integer> list = new SimpleLinkedList<>();
+        List1<Integer> list = new SimpleLinkedList<>();
         list.add(1);
         list.add(2);
         Iterator<Integer> it = list.iterator();
@@ -72,7 +71,7 @@ public class SimpleLinkedListTest {
 
     @Test
     public void whenGetIteratorTwiceThenEveryFromBegin() {
-        ListСoherentList<Integer> list = new SimpleLinkedList<>();
+        List1<Integer> list = new SimpleLinkedList<>();
         list.add(1);
         list.add(2);
         Iterator<Integer> first = list.iterator();
@@ -90,8 +89,8 @@ public class SimpleLinkedListTest {
     }
 
     @Test(expected = ConcurrentModificationException.class)
-    public void WhenOutOfBoundsAnExceptionIsThrown() {
-        ListСoherentList<Integer> list = new SimpleLinkedList<>();
+    public void whenOutOfBoundsAnExceptionIsThrown() {
+        List1<Integer> list = new SimpleLinkedList<>();
         Iterator<Integer> iterator = list.iterator();
         list.add(0);
         iterator.next();
