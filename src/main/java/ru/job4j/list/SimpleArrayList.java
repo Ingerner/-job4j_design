@@ -28,8 +28,9 @@ public class SimpleArrayList<T> implements List<T> {
     public T set(int index, T newValue) {
         Objects.checkIndex(index, size);
         modeCount++;
+        T replace = container[index];
         container[index] = newValue;
-        return newValue;
+        return replace;
     }
 
     @Override
@@ -38,6 +39,7 @@ public class SimpleArrayList<T> implements List<T> {
         modeCount++;
         T delete = container[index];
         System.arraycopy(container, index + 1, container, index, (size - 1) - index);
+        container[size - 1] = null;
         size--;
         return delete;
     }
@@ -61,9 +63,7 @@ public class SimpleArrayList<T> implements List<T> {
     public Iterator<T> iterator() {
         return new Iterator<T>() {
 
-            private final Iterator<T> data = Arrays.stream(
-                    Arrays.copyOf(container, size)).iterator();
-            
+            private int point = 0;
             final int expectedModeCount = modeCount;
 
             @Override
@@ -71,7 +71,7 @@ public class SimpleArrayList<T> implements List<T> {
                 if (expectedModeCount != modeCount) {
                     throw new ConcurrentModificationException();
                 }
-                return data.hasNext();
+                return point < size;
             }
 
             @Override
@@ -79,8 +79,30 @@ public class SimpleArrayList<T> implements List<T> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return data.next();
+                return container[point++];
             }
         };
+
+//            private final Iterator<T> data = Arrays.stream(
+//                    Arrays.copyOf(container, size)).iterator();
+//
+//            final int expectedModeCount = modeCount;
+//
+//            @Override
+//            public boolean hasNext() {
+//                if (expectedModeCount != modeCount) {
+//                    throw new ConcurrentModificationException();
+//                }
+//                return data.hasNext();
+//            }
+//
+//            @Override
+//            public T next() {
+//                if (!hasNext()) {
+//                    throw new NoSuchElementException();
+//                }
+//                return data.next();
+//            }
+//        };
     }
 }
