@@ -58,7 +58,7 @@ public class SimpleArrayList<T> implements List<T> {
         container = Arrays.copyOf(container, container.length * 2);
     }
 
-    private T infoIndex(int index){
+    private T infoIndex(int index) {
         Objects.checkIndex(index, size);
         return container[index];
     }
