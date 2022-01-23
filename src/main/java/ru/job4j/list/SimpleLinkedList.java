@@ -28,8 +28,7 @@ public class SimpleLinkedList<E> implements List1<E> {
             last = newNode;
             if (lastNode == null) {
                 first = newNode;
-            }
-            else {
+            } else {
                 lastNode.next = newNode;
             }
             size++;
