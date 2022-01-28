@@ -12,7 +12,7 @@ public class SimpleQueue<T> {
                 out.push(in.pop());
             }
         }
-        if(out.isEmpty()) {
+        if (out.isEmpty()) {
             throw new NoSuchElementException();
         }
         return out.pop();
