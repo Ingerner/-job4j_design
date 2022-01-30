@@ -9,7 +9,6 @@ public class ListUtils {
         Objects.checkIndex(index, list.size());
         ListIterator<T> iterator = list.listIterator(index);
         iterator.add(value);
-            iterator.next();
         }
 
 
@@ -17,7 +16,6 @@ public class ListUtils {
         Objects.checkIndex(index, list.size());
         ListIterator<T> iterator = list.listIterator(index + 1);
         iterator.add(value);
-        iterator.previous();
         }
 
     public static <T> void removeIf(List<T> list, Predicate<T> filter) {
