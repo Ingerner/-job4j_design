@@ -39,4 +39,20 @@ public class User {
     public void setBirthday(Calendar birthday) {
         this.birthday = birthday;
     }
+
+    public static void main(String[] args) {
+        User user1 = new User(
+                "Ivan", 1, new GregorianCalendar(2019, 8, 07)
+                                );
+        User user2 = new User(
+                "Ivan", 1, new GregorianCalendar(2019, 8, 07)
+                                  );
+
+        Map<User, Object> data = new HashMap<>();
+        data.put(user1, new Object());
+        data.put(user2, new Object());
+        for (Map.Entry<User, Object> i : data.entrySet()) {
+            System.out.println(i + "hashCode = " + i.hashCode());
+        }
+    }
 }
