@@ -17,11 +17,15 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
     @Override
     public boolean put(K key, V value) {
-        int hash = hash();
-        if (table[hash] != null) {
+        modCount++;
+        count++;
+        MapEntry element = new MapEntry(key, value);
+        int hash = hash(element.hashCode());
+        int i = indexFor(hash);
+        if (table[i] != null) {
             return false;
         }  else {
-            table[hash] = new MapEntry(key, value);
+            table[i] = element;
         }
         return true;
     }
@@ -40,11 +44,22 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
     @Override
     public V get(K key) {
+        int hash = hash(key.hashCode());
+        int i = indexFor(hash);
+        if (table[i] != null) {
+            return table[i].value;
+        }
         return null;
     }
 
     @Override
     public boolean remove(K key) {
+        int hash = hash(key.hashCode());
+        int i = indexFor(hash);
+        if (table[i] != null) {
+            table[i] = null;
+            return true;
+        }
         return false;
     }
 
@@ -58,7 +73,13 @@ public class SimpleMap<K, V> implements Map<K, V> {
                 if (expectedModeCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                return  point < table.length-1 ;
+                while (point < table.length) {
+                    if (table[point] != null) {
+                        return true;
+                    }
+                    point++;
+                }
+                return false;
             }
 
             @Override
@@ -66,7 +87,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return table[point++].key;
+                return table[point].key;
             }
         };
     }
@@ -81,5 +102,9 @@ public class SimpleMap<K, V> implements Map<K, V> {
             this.value = value;
         }
 
+        @Override
+        public int hashCode() {
+            return key.hashCode();
+        }
     }
 }
