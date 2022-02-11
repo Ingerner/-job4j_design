@@ -7,7 +7,6 @@ import java.util.Iterator;
 
 import static org.hamcrest.core.Is.is;
 
-
 public class SimpleMapTest {
 
     SimpleMap<Integer, String> map = new SimpleMap();
