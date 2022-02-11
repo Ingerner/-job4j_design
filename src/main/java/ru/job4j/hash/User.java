@@ -39,11 +39,11 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", children=" + children +
-                ", birthday=" + birthday +
-                '}';
+        return "User{"
+                + "name='" + name + '\''
+                + ", children=" + children
+                + ", birthday=" + birthday
+                + '}';
     }
 
     @Override
@@ -61,12 +61,12 @@ public class User {
                                   );
 
         Map<User, Object> data = new HashMap<>();
-        System.out.println(user1.hashCode() + "           " +user2.hashCode());
+        System.out.println(user1.hashCode() + "           " + user2.hashCode());
         data.put(user1, new Object());
         data.put(user2, new Object());
         for (Map.Entry<User, Object> i : data.entrySet()) {
-            System.out.println("Key: " +i.getKey() + "  " +"Value: " +i.getKey());
-            System.out.println("Key: " +i.hashCode());
+            System.out.println("Key: " + i.getKey() + "  " + "Value: " + i.getKey());
+            System.out.println("Key: " + i.hashCode());
             System.out.println(data.size());
         }
     }

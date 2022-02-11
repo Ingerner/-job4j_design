@@ -12,19 +12,21 @@ public class SimpleMap<K, V> implements Map<K, V> {
     private int count = 0;
 
     private int modCount = 0;
-
     private MapEntry<K, V>[] table = new MapEntry[capacity];
 
     @Override
     public boolean put(K key, V value) {
         modCount++;
         count++;
+        if (count / table.length >= LOAD_FACTOR) {
+            expand();
+        }
         MapEntry element = new MapEntry(key, value);
         int hash = hash(element.hashCode());
         int i = indexFor(hash);
         if (table[i] != null) {
             return false;
-        }  else {
+        } else {
             table[i] = element;
         }
         return true;
@@ -39,28 +41,35 @@ public class SimpleMap<K, V> implements Map<K, V> {
     }
 
     private void expand() {
-
+        capacity = capacity * 2;
+        Iterator<K> iterator = iterator();
+        table = new MapEntry[capacity];
+        if (iterator.hasNext()) {
+            K key = iterator.next();
+            put(key, get(key));
+        }
     }
 
     @Override
     public V get(K key) {
-        int hash = hash(key.hashCode());
-        int i = indexFor(hash);
-        if (table[i] != null) {
-            return table[i].value;
-        }
-        return null;
+        int i = indexFor(hash(key.hashCode()));
+        return table[i] != null ? table[i].value : null;
     }
 
     @Override
     public boolean remove(K key) {
-        int hash = hash(key.hashCode());
-        int i = indexFor(hash);
+        boolean rsl = false;
+        int i = indexFor(hash(key.hashCode()));
         if (table[i] != null) {
             table[i] = null;
-            return true;
+            rsl =  true;
         }
-        return false;
+        return rsl;
+    }
+
+    @Override
+    public int size() {
+        return count;
     }
 
     @Override
@@ -68,18 +77,21 @@ public class SimpleMap<K, V> implements Map<K, V> {
         return new Iterator<K>() {
             final int expectedModeCount = modCount;
             int point = 0;
+
             @Override
             public boolean hasNext() {
+                boolean rsl = false;
                 if (expectedModeCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
                 while (point < table.length) {
                     if (table[point] != null) {
-                        return true;
+                        rsl = true;
+                        break;
                     }
                     point++;
                 }
-                return false;
+                return rsl;
             }
 
             @Override
