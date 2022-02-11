@@ -51,15 +51,18 @@ public class User {
         return Objects.hash(name, children, birthday);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return children == user.children && Objects.equals(name, user.name) && Objects.equals(birthday, user.birthday);
+    }
+
     public static void main(String[] args) {
         Calendar day = new GregorianCalendar(2019, 8, 07);
-        User user1 = new User(
-                "Ivan", 1, day
-                                );
-        User user2 = new User(
-                "Ivan", 1, day
-                                  );
-
+        User user1 = new User("Ivan", 1, day);
+        User user2 = new User("Ivan", 1, day);
         Map<User, Object> data = new HashMap<>();
         System.out.println(user1.hashCode() + "           " + user2.hashCode());
         data.put(user1, new Object());
@@ -70,7 +73,4 @@ public class User {
             System.out.println(data.size());
         }
     }
-
-
-
 }
