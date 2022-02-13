@@ -40,7 +40,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     }
 
     private int indexFor(int hash) {
-        return hash % capacity;
+       return hash % capacity;
     }
 
     private void expand() {
@@ -56,11 +56,8 @@ public class SimpleMap<K, V> implements Map<K, V> {
     @Override
     public V get(K key) {
         int i = indexFor(hash(key.hashCode()));
-        if (table[i].key != null && Objects.equals(table[i].key, key)) {
-            return table[i].value;
-        }
-        return null;
-        //return table[i] != null ? table[i].value : null;
+        return table[i] != null && Objects.equals(table[i].key, key) ?
+                table[i].value : null;
     }
 
     @Override
