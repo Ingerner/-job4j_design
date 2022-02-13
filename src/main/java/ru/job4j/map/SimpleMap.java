@@ -3,6 +3,7 @@ package ru.job4j.map;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class SimpleMap<K, V> implements Map<K, V> {
     private static final float LOAD_FACTOR = 0.75f;
@@ -16,28 +17,30 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
     @Override
     public boolean put(K key, V value) {
+        boolean rsl = true;
         modCount++;
         count++;
-        if (count / table.length >= LOAD_FACTOR) {
+        float expansion = count / table.length;
+        if (expansion >= LOAD_FACTOR) {
             expand();
         }
         MapEntry element = new MapEntry(key, value);
-        int hash = hash(element.hashCode());
+        int hash = hash(element.key.hashCode());
         int i = indexFor(hash);
         if (table[i] != null) {
-            return false;
+           rsl = false;
         } else {
             table[i] = element;
         }
-        return true;
+        return rsl;
     }
 
     private int hash(int hashCode) {
-        return hashCode ^ (hashCode >>> table.length);
+        return hashCode ^ (hashCode >>> capacity);
     }
 
     private int indexFor(int hash) {
-        return hash % table.length;
+        return hash % capacity;
     }
 
     private void expand() {
@@ -53,7 +56,11 @@ public class SimpleMap<K, V> implements Map<K, V> {
     @Override
     public V get(K key) {
         int i = indexFor(hash(key.hashCode()));
-        return table[i] != null ? table[i].value : null;
+        if (table[i].key != null && Objects.equals(table[i].key, key)) {
+            return table[i].value;
+        }
+        return null;
+        //return table[i] != null ? table[i].value : null;
     }
 
     @Override
