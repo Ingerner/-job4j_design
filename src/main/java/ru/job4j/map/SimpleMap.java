@@ -44,12 +44,17 @@ public class SimpleMap<K, V> implements Map<K, V> {
     }
 
     private void expand() {
-        capacity = capacity * 2;
         Iterator<K> iterator = iterator();
-        table = new MapEntry[capacity];
-        if (iterator.hasNext()) {
+        MapEntry<K, V>[] tableNew = new MapEntry[capacity];
+        capacity = capacity * 2;
+        int i = 0;
+        while (iterator.hasNext()) {
             K key = iterator.next();
-            put(key, get(key));
+            tableNew[i++] = new MapEntry<>(key, get(key));
+        }
+        table = new MapEntry[capacity];
+        for (MapEntry<K, V> k : tableNew) {
+            put(k.key, k.value);
         }
     }
 
