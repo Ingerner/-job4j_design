@@ -40,6 +40,4 @@ public class SimpleTreeTest {
         tree.add(5, 6);
         assertFalse(tree.add(2, 6));
     }
-
-
 }
