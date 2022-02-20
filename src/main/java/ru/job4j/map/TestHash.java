@@ -20,11 +20,4 @@ public class TestHash {
         rezult = 31 * rezult + surname.hashCode();
         return rezult;
     }
-
-
-    public static void main(String[] args) {
-        TestHash s = new TestHash(20, "Ivan", "Ivanov");
-        TestHash s1 = new TestHash(20, "Ivan", "Ivanov");
-        System.out.println(s.hashCode() +"     "  +s1.hashCode());
-    }
 }
