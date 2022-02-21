@@ -1,7 +1,7 @@
 package ru.job4j.array;
 
 import org.junit.Assert;
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 public class MatrixTest {
     @Test
