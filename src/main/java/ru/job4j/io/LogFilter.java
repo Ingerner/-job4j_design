@@ -11,7 +11,7 @@ public class LogFilter {
         try (BufferedReader in = new BufferedReader(new FileReader("log.txt"))) {
             list = in.lines().filter(stroka -> {
                 String[] array = stroka.split(" ");
-                return array[array.length - 2].equals("404");
+                return "404".equals(array[array.length - 2]);
             }).collect(Collectors.toList());
         } catch (Exception e) {
             e.printStackTrace();
