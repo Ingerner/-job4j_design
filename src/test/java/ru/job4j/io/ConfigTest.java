@@ -33,4 +33,12 @@ public class ConfigTest {
         assertThat(config.value("name"), is("surname"));
     }
 
+    @Test (expected = IllegalArgumentException.class)
+    public void whenPairMismatch1() {
+        String path = "./data/does_not_match_pattern_1.properties";
+        Config config = new Config(path);
+        config.load();
+        assertThat(config.value("name"), is("surname"));
+    }
+
 }

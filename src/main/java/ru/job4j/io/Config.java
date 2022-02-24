@@ -23,7 +23,7 @@ public class Config {
            read.lines().filter(s -> !s.isBlank() && s.charAt(0) != '#')
                    .map(s -> s.split("="))
                    .forEach(arr -> {
-                       if (arr[0].isEmpty() || arr[1].isEmpty()) {
+                       if (arr[0].isEmpty() || arr.length == 1) {
                            throw new IllegalArgumentException();
                        }
                        values.put(arr[0], arr[1]);
