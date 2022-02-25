@@ -1,19 +1,17 @@
 package ru.job4j.io;
 
 import java.io.*;
-import java.util.*;
+
 
 public class Analizy {
 
-    private final List<String> values = new LinkedList<>();
-
     public void unavailable(String source, String target) {
-        StringJoiner jn = new StringJoiner(System.lineSeparator());
 
         try (BufferedReader read = new BufferedReader(new FileReader(source))) {
                 try (PrintWriter writer = new PrintWriter(new FileOutputStream(target))) {
-                   boolean flag = true;
-                   String start = null;
+
+                    boolean flag = true;
+                    String start = null;
                     String end = null;
                     while (read.ready()) {
                         String[] array = read.readLine().split(" ");
@@ -29,10 +27,7 @@ public class Analizy {
                             writer.println(interval);
                         }
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
