@@ -9,7 +9,6 @@ public class Analizy {
 
         try (BufferedReader read = new BufferedReader(new FileReader(source))) {
                 try (PrintWriter writer = new PrintWriter(new FileOutputStream(target))) {
-
                     boolean flag = true;
                     String start = null;
                     String end = null;
@@ -32,7 +31,6 @@ public class Analizy {
             e.printStackTrace();
         }
     }
-
         public static void main(String[] args) {
             String source = "./data/server.log";
             String target = "./data/unavailable.csv";
