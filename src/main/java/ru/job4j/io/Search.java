@@ -11,7 +11,7 @@ import java.util.function.Predicate;
 public class Search {
 
     public static void main(String[] args) throws IOException {
-        Path start = Paths.get("C:\\projects\\-job4j_design");
+        Path start = Paths.get(args[0]);  //C:\projects\-job4j_design
         search(start, p -> p.toFile().getName().endsWith(".txt")).forEach(System.out::println);
     }
 

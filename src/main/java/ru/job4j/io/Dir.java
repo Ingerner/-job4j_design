@@ -4,7 +4,7 @@ import java.io.File;
 
 public class Dir {
     public static void main(String[] args) {
-        File file = new File("c:\\projects");
+        File file = new File(args[0]); //"c:\\projects"
         if (!file.exists()) {
             throw new IllegalArgumentException(String.format("Not exsist %s", file.getAbsoluteFile()));
         }
