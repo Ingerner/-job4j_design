@@ -14,7 +14,7 @@ public class Search {
         Path start = Paths.get(args[0]);
         String end = args[1];
         if (args.length == 2) {
-           if (! Files.exists(start)) {
+           if (!Files.exists(start)) {
                throw new IllegalArgumentException(String.format("Not exist %s", start.isAbsolute()));
            }
            if (!Files.isDirectory(start)) {
