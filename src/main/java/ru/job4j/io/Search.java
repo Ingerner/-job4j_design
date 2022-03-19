@@ -20,7 +20,7 @@ public class Search {
            if (!Files.isDirectory(start)) {
                throw new IllegalArgumentException(String.format("Not exist %s", start.isAbsolute()));
            }
-           if (!args[1].equals(".txt")) {
+           if (!".txt".startsWith(args[1])) {
                throw new IllegalArgumentException("расширение не соответствует");
            }
 
