@@ -16,7 +16,6 @@ public class ArgsName {
        for (String index : args) {
            String [] split = index.replaceFirst("-", "").split("=");
        }
-
     }
 
     public static ArgsName of(String[] args) {
