@@ -23,7 +23,6 @@ public class Search {
            if (!".txt".startsWith(args[1])) {
                throw new IllegalArgumentException("расширение не соответствует");
            }
-
         } else {
             throw new IllegalArgumentException("array is empty.");
         }
