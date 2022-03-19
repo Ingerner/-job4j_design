@@ -11,22 +11,22 @@ import java.util.function.Predicate;
 public class Search {
 
     public static void main(String[] args) throws IOException {
-        Path start = Paths.get(args[0]);
-        String end = args[1];
+
         if (args.length == 2) {
-           if (!Files.exists(start)) {
-               throw new IllegalArgumentException(String.format("Not exist %s", start.isAbsolute()));
-           }
-           if (!Files.isDirectory(start)) {
-               throw new IllegalArgumentException(String.format("Not exist %s", start.isAbsolute()));
-           }
-           if (!".txt".startsWith(args[1])) {
-               throw new IllegalArgumentException("расширение не соответствует");
-           }
-        } else {
             throw new IllegalArgumentException("array is empty.");
         }
-        search(start, p -> p.toFile().getName().endsWith(args[1])).forEach(System.out::println);
+        Path start = Paths.get(args[0]);
+        String end = args[1];
+       if (!Files.exists(start)) {
+           throw new IllegalArgumentException(String.format("Not exist %s", start.isAbsolute()));
+       }
+       if (!Files.isDirectory(start)) {
+           throw new IllegalArgumentException(String.format("Not exist %s", start.isAbsolute()));
+       }
+       if (!".txt".startsWith(end)) {
+           throw new IllegalArgumentException("расширение не соответствует");
+       }
+        search(start, p -> p.toFile().getName().endsWith(end)).forEach(System.out::println);
     }
 
     public static List<Path> search(Path root, Predicate<Path> condition) throws IOException {
