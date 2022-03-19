@@ -1,20 +1,27 @@
 package ru.job4j.io;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ArgsName {
 
     private final Map<String, String> values = new HashMap<>();
 
-    private String get(String key) {
+    String get(String key) {
         return values.get(key);
     }
 
     private void  parse(String[] args) {
+        if (!(args.length > 0)) {
+            throw new IllegalArgumentException("array is empty.");
+        }
        for (String index : args) {
-           String[] split = index.replaceFirst("-", "").split("=");
+           String[]  rsl = index.replaceFirst("-", "").split("=", 2);
+           if (rsl[0] == "" || rsl[1] == "") {
+               throw new IllegalArgumentException("not matching (key, value)");
+           }
+           values.put(rsl[0], rsl[1]);
        }
     }
 
