@@ -20,7 +20,7 @@ public class ArgsName {
        for (String index : args) {
            cardCheck(index);
            String[]  rsl = index.replaceFirst("-", "").split("=", 2);
-           if (rsl[0] == "" || rsl[1] == "") {
+           if (Objects.equals(rsl[0], "") || Objects.equals(rsl[1], "")) {
                throw new IllegalArgumentException("not matching (key, value)");
            }
            values.put(rsl[0], rsl[1]);

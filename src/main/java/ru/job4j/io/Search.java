@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 public class Search {
@@ -23,7 +24,7 @@ public class Search {
        if (!Files.isDirectory(start)) {
            throw new IllegalArgumentException(String.format("Not exist %s", start.isAbsolute()));
        }
-       if (!('.' == end.charAt(0))) {
+       if (!(Objects.equals('.', end.charAt(0)))) {
            throw new IllegalArgumentException("расширение не соответствует");
        }
         search(start, p -> p.toFile().getName().endsWith(end)).forEach(System.out::println);
