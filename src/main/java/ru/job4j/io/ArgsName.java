@@ -1,14 +1,15 @@
 package ru.job4j.io;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ArgsName {
 
     private final Map<String, String> values = new HashMap<>();
 
     String get(String key) {
+       if (!values.containsKey(key)) {
+            throw new IllegalArgumentException("заданный ключ не найден");
+        }
         return values.get(key);
     }
 
@@ -17,6 +18,7 @@ public class ArgsName {
             throw new IllegalArgumentException("array is empty.");
         }
        for (String index : args) {
+           cardCheck(index);
            String[]  rsl = index.replaceFirst("-", "").split("=", 2);
            if (rsl[0] == "" || rsl[1] == "") {
                throw new IllegalArgumentException("not matching (key, value)");
@@ -29,6 +31,12 @@ public class ArgsName {
         ArgsName names = new ArgsName();
         names.parse(args);
         return names;
+    }
+
+    private void cardCheck(String index) {
+        if (!(('-' == index.charAt(0)) && index.contains("="))) {
+            throw new IllegalArgumentException("не соответствие шаблона");
+        }
     }
 
     public static void main(String[] args) {
