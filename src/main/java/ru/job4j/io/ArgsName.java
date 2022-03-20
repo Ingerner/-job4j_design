@@ -34,7 +34,7 @@ public class ArgsName {
     }
 
     private void cardCheck(String index) {
-        if (!(('-' == index.charAt(0)) && index.contains("="))) {
+        if (!((Objects.equals('-', index.charAt(0))) && index.contains("="))) {
             throw new IllegalArgumentException("не соответствие шаблона");
         }
     }
