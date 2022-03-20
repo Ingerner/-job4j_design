@@ -12,7 +12,7 @@ public class Search {
 
     public static void main(String[] args) throws IOException {
 
-        if (args.length == 2) {
+        if (!(args.length == 2)) {
             throw new IllegalArgumentException("array is empty.");
         }
         Path start = Paths.get(args[0]);
@@ -23,7 +23,7 @@ public class Search {
        if (!Files.isDirectory(start)) {
            throw new IllegalArgumentException(String.format("Not exist %s", start.isAbsolute()));
        }
-       if (!".txt".startsWith(end)) {
+       if (!('.' == end.charAt(0))) {
            throw new IllegalArgumentException("расширение не соответствует");
        }
         search(start, p -> p.toFile().getName().endsWith(end)).forEach(System.out::println);
