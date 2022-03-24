@@ -42,7 +42,6 @@ public class ConsoleChat {
 
     private List<String> readPhrases() {
         List<String> list = new ArrayList<>();
-        //StringBuilder builder = new StringBuilder();
         try (BufferedReader br = new BufferedReader(new FileReader(botAnswers, Charset.forName("WINDOWS-1251")))) {
             list = br.lines().map(s -> s + System.lineSeparator()).collect(Collectors.toList());
         } catch (IOException e) {
