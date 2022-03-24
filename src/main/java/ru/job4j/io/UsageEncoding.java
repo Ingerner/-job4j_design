@@ -7,7 +7,7 @@ import java.util.List;
 public class UsageEncoding {
     public String riadFile(String path) {
         StringBuilder builder = new StringBuilder();
-        try (BufferedReader br =new BufferedReader(new FileReader(path, Charset.forName("WINDOWS-1251")))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(path, Charset.forName("WINDOWS-1251")))) {
             br.lines().map(s -> s + System.lineSeparator()).forEach(builder::append);
         } catch (IOException e) {
             e.printStackTrace();
