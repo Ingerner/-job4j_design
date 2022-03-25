@@ -31,6 +31,9 @@ public class ConsoleChat {
                     question = scanner.nextLine();
                     logOut.add(question);
                 }
+                String answer = listRead.get(random.nextInt(listRead.size() - 1));
+                logOut.add(answer);
+                System.out.println(answer);
             } else if (!OUT.equals(question)) {
                 String answer = listRead.get(random.nextInt(listRead.size() - 1));
                 logOut.add(answer);
@@ -51,7 +54,6 @@ public class ConsoleChat {
     }
 
     private  void saveLog(List<String> log) {
-        StringBuilder builder = new StringBuilder();
         try (PrintWriter pw =
                      new PrintWriter(new FileWriter(path, Charset.forName("WINDOWS-1251"), true))) {
             log.forEach(pw::println);
@@ -61,9 +63,8 @@ public class ConsoleChat {
     }
 
     private void validation(String[] strings) {
-        File fileOut = new File(strings[0]);
-        File fileIn = new File(strings[0]);
-        if (!(fileOut.exists() && fileIn.exists())) {
+        File fileIn = new File(strings[1]);
+        if (!fileIn.exists()) {
             throw new IllegalArgumentException(String.format("Not exist %s"));
         }
         if (!(strings[0].endsWith(".txt"))
