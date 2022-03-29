@@ -16,13 +16,13 @@ public class EchoServer {
                     String str = in.readLine();
                     if (str.contains("?msg=Hello")) {
                         out.write("Hello".getBytes());
-                        break;
+                    } else {
+                        if (str.contains("?msg=Exit")) {
+                            server.close();
+                        } else {
+                            out.write("Wath".getBytes());
+                        }
                     }
-                    if (str.contains("?msg=Exit")) {
-                        server.close();
-                        break;
-                    }
-                    out.write("Wath".getBytes());
                     out.flush();
                 }
             }
