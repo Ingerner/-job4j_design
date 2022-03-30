@@ -9,8 +9,6 @@ import java.util.StringJoiner;
 
 public class CSVReaderFin {
     public static void handleFin(ArgsName argsName) throws Exception {
-        ArgsName array =ArgsName.of(argsName)
-        File sourceFile = new File(argsName.get("path"));
         String out = argsName.get("out");
         String delimiter = argsName.get("delimiter");
     }
