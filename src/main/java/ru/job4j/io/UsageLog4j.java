@@ -16,7 +16,8 @@ public class UsageLog4j {
     byte log = 4;
     double dbl = 100500.99;
     boolean flag = true;
-    LOG.debug("Вывод переменных : {}, age : {}, money : {}, size : {}, Length : {}, exit : {}, log : {}, dbl : {}, flag",
+    LOG.debug("Вывод переменных : {}, age : {}, money : {}, size : {}, " +
+                    "Length : {}, exit : {}, log : {}, dbl : {}, flag",
             age, money, size,length, exit, log, dbl, flag);
     }
 }
