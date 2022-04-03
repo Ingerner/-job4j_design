@@ -7,8 +7,10 @@ public class Main {
     public static void main(String[] args) {
         final Human human = new Human(false, 30, "Ivan",
                 new Contact(123456, "+7 (000) 000-00-00"), new int[] {1, 2, 3});
+
         final Gson gson = new GsonBuilder().create();
         System.out.println(gson.toJson(human));
+
         final String humanJson =
                 "{"
                         + "\"flaf\": false,"
