@@ -8,7 +8,6 @@ import org.junit.rules.TemporaryFolder;
 import java.io.File;
 import java.nio.file.Files;
 
-import static org.junit.Assert.*;
 
 public class CSVReaderTest {
     @Rule
@@ -39,4 +38,5 @@ public class CSVReaderTest {
         CSVReader.handle(argsName);
         Assert.assertEquals(expected, Files.readString(target.toPath()));
     }
+
 }

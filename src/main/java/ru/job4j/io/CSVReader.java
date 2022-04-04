@@ -1,7 +1,10 @@
 package ru.job4j.io;
 
+import org.junit.rules.TemporaryFolder;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -51,16 +54,26 @@ public class CSVReader {
                 indexColumns.forEach(el -> lineJoiner.add(line[el]));
                 stringJoiner.merge(lineJoiner);
                  outputLine = stringJoiner + System.lineSeparator();
-                if (out.equals("stdout")) {
-                    System.out.println(outputLine);
-                } else {
-                        try (FileOutputStream outputStream = new FileOutputStream(out)) {
-                        outputStream.write(outputLine.getBytes(StandardCharsets.UTF_8));
-                    }
+
+            }
+            if (out.equals("stdout")) {
+                System.out.println(outputLine);
+            } else {
+                try (FileOutputStream outputStream = new FileOutputStream(out)) {
+                    outputStream.write(outputLine.getBytes(StandardCharsets.UTF_8));
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    public static void main(String[] args) throws Exception {
+        if (!(args.length == 4)) {
+            throw new IllegalArgumentException("array is empty.");
+        }
+        ArgsName argsName = ArgsName.of(args);
+        handle(argsName);
+    }
+
 }

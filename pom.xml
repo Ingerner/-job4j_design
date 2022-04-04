@@ -115,7 +115,7 @@
               <finalName>CSVReader</finalName>
               <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>ru.job4j.serialization.CSVReader</mainClass>
+                  <mainClass>ru.job4j.io.CSVReader</mainClass>
                 </transformer>
               </transformers>
             </configuration>
