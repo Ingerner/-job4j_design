@@ -13,7 +13,7 @@ public class Main {
 
         final String humanJson =
                 "{"
-                        + "\"flaf\": false,"
+                        + "\"flag\": false,"
                         + "\"age\": 30,"
                         + "\"name\":\" Ivan\","
                         + "\"contact\":"
