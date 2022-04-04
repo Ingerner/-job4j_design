@@ -1,0 +1,9 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<human flag="false" age="30" name="Ivan">
+    <Concat zipCode="123456" phone="+7 (000) 000-00-00" />
+    <numbers>
+        <number>1</number>
+        <number>2</number>
+        <number>3</number>
+    </numbers>
+</human>
