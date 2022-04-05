@@ -15,25 +15,19 @@ public class Main {
     public static void main(String[] args) throws JAXBException {
         final Human human = new Human(false, 30, "Ivan",
                 new Contact(123456, "+7 (000) 000-00-00"), new int[] {1, 2, 3});
-
         JAXBContext context = JAXBContext.newInstance(Human.class);
-        /* Создаем сериализатор */
         Marshaller marshaller = context.createMarshaller();
-        /* Указываем, что нам нужно форматирование */
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
         String xml = "";
         try (StringWriter writer = new StringWriter()) {
-            /* Сериализуем */
             marshaller.marshal(human, writer);
             xml = writer.getBuffer().toString();
             System.out.println(xml);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        /* Для десериализации нам нужно создать десериализатор */
         Unmarshaller unmarshaller = context.createUnmarshaller();
         try (StringReader reader = new StringReader(xml)) {
-            /* десериализуем */
             Human result = (Human) unmarshaller.unmarshal(reader);
             System.out.println(result);
         }
