@@ -3,28 +3,39 @@ package ru.job4j.serialization;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import java.io.IOException;
+import java.io.StringReader;
+import java.io.StringWriter;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws JAXBException {
         final Human human = new Human(false, 30, "Ivan",
                 new Contact(123456, "+7 (000) 000-00-00"), new int[] {1, 2, 3});
 
-        final Gson gson = new GsonBuilder().create();
-        System.out.println(gson.toJson(human));
-
-        final String humanJson =
-                "{"
-                        + "\"flag\": false,"
-                        + "\"age\": 30,"
-                        + "\"name\":\" Ivan\","
-                        + "\"contact\":"
-                        + "{"
-                        + "\"zipCode\": 123456,"
-                        + "\"phone\":\"+7 (000) 000-00-00\""
-                        + "},"
-                        + "\"number\":"
-                        + "[\"1\",\"2\",\"3\"]"
-                        + "}";
-        final Human humanMod = gson.fromJson(humanJson, Human.class);
-        System.out.println(humanMod);
+        JAXBContext context = JAXBContext.newInstance(Human.class);
+        /* Создаем сериализатор */
+        Marshaller marshaller = context.createMarshaller();
+        /* Указываем, что нам нужно форматирование */
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+        String xml = "";
+        try (StringWriter writer = new StringWriter()) {
+            /* Сериализуем */
+            marshaller.marshal(human, writer);
+            xml = writer.getBuffer().toString();
+            System.out.println(xml);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        /* Для десериализации нам нужно создать десериализатор */
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        try (StringReader reader = new StringReader(xml)) {
+            /* десериализуем */
+            Human result = (Human) unmarshaller.unmarshal(reader);
+            System.out.println(result);
+        }
     }
 }
