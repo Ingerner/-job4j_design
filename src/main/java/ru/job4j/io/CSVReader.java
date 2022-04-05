@@ -1,14 +1,8 @@
 package ru.job4j.io;
 
-import org.junit.rules.TemporaryFolder;
-
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.util.*;
-import java.util.stream.Collectors;
-
-
 
 public class CSVReader {
 
@@ -16,12 +10,8 @@ public class CSVReader {
         if (!file.exists()) {
             throw new IllegalArgumentException("file does not exist");
         }
-        if (!delimiter.equals(";")) {
+        if (!";".equals(delimiter)) {
             throw new IllegalArgumentException("invalid delimiter");
-        }
-        if (!(out.equals("stdout") || new File(out).exists())) {
-            throw new IllegalArgumentException("invalid output data");
-
         }
     }
 
@@ -69,7 +59,7 @@ public class CSVReader {
     }
 
     public static void main(String[] args) throws Exception {
-        if (!(args.length == 4)) {
+        if (args.length != 4) {
             throw new IllegalArgumentException("array is empty.");
         }
         ArgsName argsName = ArgsName.of(args);
