@@ -8,8 +8,7 @@ import java.util.List;
 
 public class MainJSONinPOJO {
     public static void main(String[] args) throws JAXBException {
-        JSONObject jsonContact = new JSONObject("{\"zipCode\":\"123456\"}",
-                "{\"phone\":\"+7 (111) 111-11-11\"}");
+        JSONObject jsonContact = new JSONObject("{\"phone\":\"+7 (111) 111-11-11\",\"zipCode\":\"123456\"}");
         List<String> list = new ArrayList<>();
         list.add("Student");
         list.add("Free");
@@ -21,12 +20,12 @@ public class MainJSONinPOJO {
         jsonObject.put("sex", human.isFlag());
         jsonObject.put("age", human.getAge());
         jsonObject.put("name", human.getName());
-        jsonObject.put("concat", jsonContact);
+        jsonObject.put("contact", jsonContact);
         jsonObject.put("statuses", jsonStatuses);
 
-        System.out.println(jsonObject.toString());
+        System.out.println(jsonObject);
 
-        System.out.println(new JSONObject(human).toString());
+        System.out.println(new JSONObject(human));
     }
 }
 
