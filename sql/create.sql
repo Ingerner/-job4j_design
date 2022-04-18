@@ -15,18 +15,16 @@ create table rules(
     role_rights text
 );
 
-create table reles_role(
+create table role_rules(
     id serial primary key,
-    rules_id int references rules(id),
-    role_id int references role(id)
-)
+    role_id int references role(id),
+    rules_id int references rules(id)
+);
 
 create table item(
     id serial primary key,
     item text,
-    users_id int references users(id),
-    cotegory_id int references cotegory,
-    state_id int references state(id)
+    users_id int references users(id)
 );
 
 create table comments(
@@ -41,14 +39,20 @@ create table attachs(
     item_id int references item(id)
 );
 
+create table category(
+    id serial primary key,
+    category   text
+);
+
+alter table item add column category_id int references category(id);
+
 create table state (
     id serial primary key,
     state  text
 );
 
-create table category(
-    id serial primary key,
-    category   text
-);
+alter table item add column state_id text;
+
+
 
 

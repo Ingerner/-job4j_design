@@ -1,1 +1,1 @@
-create database users_androles;
+create database users_and_roles;
