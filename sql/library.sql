@@ -9,4 +9,3 @@ create table books(
 	author varchar(255),
 	reader_id int references reader(id)
 );
-
