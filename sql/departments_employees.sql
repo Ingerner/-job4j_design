@@ -42,6 +42,7 @@ CREATE TABLE teens(
 	gender char(1)
 )
 
+
 INSERT INTO teens(name, gender) VALUES  ('Igor', 'm'), ('Sergey', 'm'), ('Egor', 'm'),
 										('Oleg', 'm'), ('Petr', 'm'), ('Mihail', 'm'),
 										('Andrey', 'm'), ('Stas', 'm'), ('Aleksey', 'm'),
