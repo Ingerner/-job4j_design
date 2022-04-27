@@ -15,6 +15,7 @@ INSERT INTO departments(name) VALUES('department-1'),
                                     ('department-2'),
                                     ('department-3'),
                                     ('department-4');
+
 INSERT INTO employees(name, departments_id) VALUES  ('employee_1', 1),
                                                     ('employee_2', null),
                                                     ('employee_3', 2),
