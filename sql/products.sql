@@ -3,7 +3,7 @@ CREATE DATABASE products;
 CREATE TABLE type(
     id serial primary key,
     name text
-)
+);
 
 CREATE TABLE product(
     id serial primary key,
@@ -11,7 +11,7 @@ CREATE TABLE product(
     date timestamp,
     price float,
     type_id int REFERENCES type(id)
-)
+);
 
 INSERT INTO type(name) VALUES('сыр'), ('мороженное'),('молоко');
 
