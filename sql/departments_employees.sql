@@ -3,13 +3,13 @@ CREATE DATABASE departments_employees;
 CREATE TABLE departments(
     id serial primary key,
     name varchar(255)
-)
+);
 
 CREATE TABLE employees(
     id serial primary key,
     name varchar(255),
     departments_id int REFERENCES departments(id)
-)
+);
 
 INSERT INTO departments(name) VALUES('department-1'),
                                     ('department-2'),
@@ -40,7 +40,7 @@ CREATE TABLE teens(
 	id serial primary key,
 	name varchar(255),
 	gender char(1)
-)
+);
 
 
 INSERT INTO teens(name, gender) VALUES  ('Igor', 'm'), ('Sergey', 'm'), ('Egor', 'm'),
