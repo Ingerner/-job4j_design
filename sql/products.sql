@@ -39,10 +39,8 @@ WHERE name LIKE '%мороженное%';
 SELECT name FROM product
 WHERE date < current_date;
 
-SELECT  name, max(price) FROM product
-GROUP BY name
-ORDER BY max(price) DESC
-LIMIT 1;
+SELECT  name, price FROM product
+WHERE price = (select max(price) from product);
 
 SELECT  t.name, count(p.name) FROM type t
 JOIN product p ON t.id=p.type_id
