@@ -88,7 +88,6 @@ public class TableEditor implements AutoCloseable {
         exe(tableName, sql);
     }
 
-
     public static String getTableScheme(Connection connection, String tableName) throws Exception {
         var rowSeparator = "-".repeat(30).concat(System.lineSeparator());
         var header = String.format("%-15s|%-15s%n", "NAME", "TYPE");
@@ -127,6 +126,5 @@ public class TableEditor implements AutoCloseable {
         editor.dropColumn("example_table", "first_name");
         editor.renameColumn("example_table", "name", "human");
         editor.dropTable("example_table");
-
     }
 }
