@@ -50,7 +50,6 @@ public class TableEditor implements AutoCloseable {
      exe(tableName, sql);
     }
 
-
     public void dropTable(String tableName) {
             String sql = String.format(
                     "drop table %s;",
