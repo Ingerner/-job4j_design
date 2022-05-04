@@ -16,84 +16,76 @@ public class TableEditor implements AutoCloseable {
     }
 
     private void initConnection() throws ClassNotFoundException, SQLException {
-        Class.forName("org.postgresql.Driver");
+        String driver = properties.getProperty("driver");
+        Class.forName(driver);
         String url = properties.getProperty("url");
         String user = properties.getProperty("login");
         String password = properties.getProperty("password");
         connection = DriverManager.getConnection(url, user, password);
     }
 
-    public void createTable(String tableName) {
+    public  void exe(String tableName, String sql){
         try (Statement statement = connection.createStatement()) {
+            statement.execute(sql);
+            System.out.println(getTableScheme(connection, tableName));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void executeUp(String tableName, String sql){
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void createTable(String tableName) {
             String sql = String.format(
                     "create table if not exists %s(%s, %s);",
                     tableName,
                     "id serial primary key",
                     "name text"
             );
-            statement.execute(sql);
-            System.out.println(getTableScheme(connection, tableName));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+     exe(tableName,sql);
     }
 
 
     public void dropTable(String tableName) {
-        try (Statement statement = connection.createStatement()) {
             String sql = String.format(
                     "drop table %s;",
                     tableName
             );
-            statement.execute(sql);
-           // System.out.println(getTableScheme(connection, tableName));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        executeUp(tableName,sql);
     }
 
     public void addColumn(String tableName, String columnName, String type) {
-        try (Statement statement = connection.createStatement()) {
             String sql = String.format(
                     "alter table %s add %s %s;",
                     tableName,
                     columnName,
                     type
             );
-            statement.execute(sql);
-            System.out.println(getTableScheme(connection, tableName));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        exe(tableName,sql);
     }
 
     public void dropColumn(String tableName, String columnName) {
-        try (Statement statement = connection.createStatement()) {
             String sql = String.format(
                     "alter table %s drop %s;",
                     tableName,
                     columnName
             );
-            statement.execute(sql);
-            System.out.println(getTableScheme(connection, tableName));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        exe(tableName,sql);
     }
 
     public void renameColumn(String tableName, String columnName, String newColumnName) {
-        try (Statement statement = connection.createStatement()) {
             String sql = String.format(
                     "alter table %s rename %s to %s;",
                     tableName,
                     columnName,
                     newColumnName
             );
-            statement.execute(sql);
-            System.out.println(getTableScheme(connection, tableName));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        exe(tableName,sql);
     }
 
 
@@ -125,6 +117,7 @@ public class TableEditor implements AutoCloseable {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         Properties properties = new Properties();
+        properties.put("driver", "org.postgresql.Driver");
         properties.put("url", "jdbc:postgresql://localhost:5432/idea_db");
         properties.put("login", "postgres");
         properties.put("password", "*#*Job4j");
@@ -133,7 +126,7 @@ public class TableEditor implements AutoCloseable {
         editor.addColumn("example_table", "first_name", "varchar(255)");
         editor.dropColumn("example_table", "first_name");
         editor.renameColumn("example_table", "name", "human");
-        //editor.dropTable("example_table");
+        editor.dropTable("example_table");
 
     }
 }
