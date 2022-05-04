@@ -24,7 +24,7 @@ public class TableEditor implements AutoCloseable {
         connection = DriverManager.getConnection(url, user, password);
     }
 
-    public  void exe(String tableName, String sql){
+    public  void exe(String tableName, String sql) {
         try (Statement statement = connection.createStatement()) {
             statement.execute(sql);
             System.out.println(getTableScheme(connection, tableName));
@@ -33,7 +33,7 @@ public class TableEditor implements AutoCloseable {
         }
     }
 
-    public void executeUp(String tableName, String sql){
+    public void executeUp(String tableName, String sql) {
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate(sql);
         } catch (Exception e) {
@@ -47,7 +47,7 @@ public class TableEditor implements AutoCloseable {
                     "id serial primary key",
                     "name text"
             );
-     exe(tableName,sql);
+     exe(tableName, sql);
     }
 
 
@@ -56,7 +56,7 @@ public class TableEditor implements AutoCloseable {
                     "drop table %s;",
                     tableName
             );
-        executeUp(tableName,sql);
+        executeUp(tableName, sql);
     }
 
     public void addColumn(String tableName, String columnName, String type) {
@@ -66,7 +66,7 @@ public class TableEditor implements AutoCloseable {
                     columnName,
                     type
             );
-        exe(tableName,sql);
+        exe(tableName, sql);
     }
 
     public void dropColumn(String tableName, String columnName) {
@@ -75,7 +75,7 @@ public class TableEditor implements AutoCloseable {
                     tableName,
                     columnName
             );
-        exe(tableName,sql);
+        exe(tableName, sql);
     }
 
     public void renameColumn(String tableName, String columnName, String newColumnName) {
@@ -85,7 +85,7 @@ public class TableEditor implements AutoCloseable {
                     columnName,
                     newColumnName
             );
-        exe(tableName,sql);
+        exe(tableName, sql);
     }
 
 
