@@ -32,7 +32,7 @@ public class TableEditor implements AutoCloseable {
                     "name text"
             );
             statement.execute(sql);
-            System.out.println(getTableScheme(connection, "tableName"));
+            System.out.println(getTableScheme(connection, tableName));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -46,19 +46,54 @@ public class TableEditor implements AutoCloseable {
                     tableName
             );
             statement.execute(sql);
-            //System.out.println(getTableScheme(connection, "tableName"));
+           // System.out.println(getTableScheme(connection, tableName));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public void addColumn(String tableName, String columnName, String type) {
+        try (Statement statement = connection.createStatement()) {
+            String sql = String.format(
+                    "alter table %s add %s %s;",
+                    tableName,
+                    columnName,
+                    type
+            );
+            statement.execute(sql);
+            System.out.println(getTableScheme(connection, tableName));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void dropColumn(String tableName, String columnName) {
+        try (Statement statement = connection.createStatement()) {
+            String sql = String.format(
+                    "alter table %s drop %s;",
+                    tableName,
+                    columnName
+            );
+            statement.execute(sql);
+            System.out.println(getTableScheme(connection, tableName));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void renameColumn(String tableName, String columnName, String newColumnName) {
+        try (Statement statement = connection.createStatement()) {
+            String sql = String.format(
+                    "alter table %s rename %s to %s;",
+                    tableName,
+                    columnName,
+                    newColumnName
+            );
+            statement.execute(sql);
+            System.out.println(getTableScheme(connection, tableName));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -95,6 +130,10 @@ public class TableEditor implements AutoCloseable {
         properties.put("password", "*#*Job4j");
         TableEditor editor = new TableEditor(properties);
         editor.createTable("example_table");
+        editor.addColumn("example_table", "first_name", "varchar(255)");
+        editor.dropColumn("example_table", "first_name");
+        editor.renameColumn("example_table", "name", "human");
+        //editor.dropTable("example_table");
 
     }
 }
