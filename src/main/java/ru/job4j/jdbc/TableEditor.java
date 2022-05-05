@@ -116,7 +116,7 @@ public class TableEditor implements AutoCloseable {
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        try (InputStream in = TableEditor.class.getClassLoader().getResourceAsStream("app.properties")){
+        try (InputStream in = TableEditor.class.getClassLoader().getResourceAsStream("app.properties")) {
             Properties properties = new Properties();
             properties.load(in);
             TableEditor editor = new TableEditor(properties);
