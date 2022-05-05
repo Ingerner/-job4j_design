@@ -1,5 +1,7 @@
 package ru.job4j.jdbc;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.Properties;
 import java.util.StringJoiner;
@@ -33,7 +35,7 @@ public class TableEditor implements AutoCloseable {
         }
     }
 
-    public void executeUp(String tableName, String sql) {
+    public void executeUp(String sql) {
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate(sql);
         } catch (Exception e) {
@@ -55,7 +57,7 @@ public class TableEditor implements AutoCloseable {
                     "drop table %s;",
                     tableName
             );
-        executeUp(tableName, sql);
+        executeUp(sql);
     }
 
     public void addColumn(String tableName, String columnName, String type) {
@@ -114,16 +116,18 @@ public class TableEditor implements AutoCloseable {
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        Properties properties = new Properties();
-        properties.put("driver", "org.postgresql.Driver");
-        properties.put("url", "jdbc:postgresql://localhost:5432/idea_db");
-        properties.put("login", "postgres");
-        properties.put("password", "*#*Job4j");
-        TableEditor editor = new TableEditor(properties);
-        editor.createTable("example_table");
-        editor.addColumn("example_table", "first_name", "varchar(255)");
-        editor.dropColumn("example_table", "first_name");
-        editor.renameColumn("example_table", "name", "human");
-        editor.dropTable("example_table");
+        try (InputStream in = TableEditor.class.getClassLoader().getResourceAsStream("app.properties")){
+            Properties properties = new Properties();
+            properties.load(in);
+            TableEditor editor = new TableEditor(properties);
+            editor.createTable("example_table");
+            editor.addColumn("example_table", "first_name", "varchar(255)");
+            editor.dropColumn("example_table", "first_name");
+            editor.renameColumn("example_table", "name", "human");
+            editor.dropTable("example_table");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
