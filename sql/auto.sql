@@ -47,10 +47,10 @@ on k.id=c.id_kuzov
 where c.name is null;
 
 select e.name from engine e left join car c
-on e.id=c.id_kuzov
+on e.id=c.id_egine
 where c.name is null;
 
 select t.name from transmission t left join car c
-on t.id=c.id_kuzov
+on t.id=c.id_transmission
 where c.name is null;
 
