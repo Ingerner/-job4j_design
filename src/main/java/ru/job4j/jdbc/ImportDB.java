@@ -27,6 +27,9 @@ public class ImportDB {
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
             rd.lines().forEach(st -> {
                 String[] array = st.split(";", 2);
+                if (array.length != 2 || array[0].isEmpty() || array[1].isEmpty()) {
+                    throw new IllegalArgumentException();
+                }
                 users.add(new User(array[0], array[1]));
             });
             return  users;
@@ -64,6 +67,7 @@ public class ImportDB {
         try (InputStream in = ImportDB.class.getClassLoader().getResourceAsStream("app.properties")) {
             cfg.load(in);
         }
-        ImportDB db = new ImportDB(cfg, "./dump.txt");
+        ImportDB db = new ImportDB(cfg, "C:\\projects\\-job4j_design\\src\\main\\java\\ru\\job4j\\jdbc\\dump.txt");
+        db.save(db.load());
     }
 }

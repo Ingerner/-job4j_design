@@ -1,2 +1,4 @@
 Petr Arsentev;parsentev@yandex.ru;
 Ivan Ivanov;iivanov@gmail.com;
+Andrey Petrov;petrov@mail.ru;
+Oleg Korotkiy;korotkiy.o@yandex.ru
