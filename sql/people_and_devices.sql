@@ -34,3 +34,8 @@ join devices_people dp on p.id=dp.people_id
 join devices d on d.id = dp.devices_id
 group by p.name
 having avg(d.price)>50000;
+
+SELECT  name, max(price) FROM product
+GROUP BY name
+ORDER BY max(price) DESC
+LIMIT 1;

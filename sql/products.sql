@@ -1,60 +1,120 @@
-CREATE DATABASE products;
-
-CREATE TABLE type(
+create table products (
     id serial primary key,
-    name text
+    name varchar(50),
+    producer varchar(50),
+    count integer default 0,
+    price integer
 );
 
-CREATE TABLE product(
+create or replace function discount()
+    returns trigger as
+$$
+    BEGIN
+        update products
+        set price = price - price * 0.2
+        where count <= 5 AND id = new.id;
+        return NEW;
+    END;
+$$
+LANGUAGE 'plpgsql';
+
+create trigger discount_trigger
+    after insert
+    on products
+    for each row
+    execute procedure discount();
+	
+	
+insert into products (name, producer, count, price) VALUES ('product_3', 'producer_3', 8, 115);
+	
+select * from products;
+	
+insert into products (name, producer, count, price) VALUES ('product_1', 'producer_1', 3, 50);
+	
+alter table products disable trigger discount_trigger;
+
+delete from products;
+
+-- триггер 1 --
+  
+create or replace function tax_with_price()
+    returns trigger as
+$$
+    BEGIN
+        update products
+        set price = price + price * 0.2
+		where id = (select id from inserted);
+        return new;
+    END;
+$$
+LANGUAGE 'plpgsql';
+	
+
+create trigger tax_stat
+	 AFTER insert on products
+	 referencing new table as inserted
+	 for each statement
+   	 execute procedure tax_with_price();
+	 
+insert into products (name, producer, count, price) VALUES ('product_1', 'producer_1', 3, 50);
+	
+select * from products;
+
+-- триггер 2 --
+
+create or replace function tax_row()
+    returns trigger as
+$$
+    BEGIN
+        update products
+        set price = price + price * 0.2
+        where id = new.id;
+        return NEW;
+    END;
+$$
+LANGUAGE 'plpgsql';
+
+create trigger tax_with_price_row
+    BEFORE insert
+    on products
+    for each row
+    execute procedure tax_row();
+	
+insert into products (name, producer, count, price) VALUES ('product_3', 'producer_3', 8, 115);
+	
+select * from products;
+
+-- триггер 3 --
+create view product_view as select * from products
+
+create table history_of_price (
     id serial primary key,
-    name text,
-    date timestamp,
-    price float,
-    type_id int REFERENCES type(id)
+    name varchar(50),
+    price integer,
+    date timestamp
 );
 
-INSERT INTO type(name) VALUES('сыр'), ('мороженное'),('молоко');
+create or replace function product_addition()
+    returns trigger as
+$$
+    BEGIN
+        insert into history_of_price(name, price)
+		values (new.name, new.price);
+		return price_name_and_date;
+    END;
+$$
+LANGUAGE 'plpgsql';
 
-INSERT INTO product(name, date, price, type_id) VALUES('сыр плавленный', date '2022-01-10',90.50, 1),
-                                                    ('маздам', date '2022-05-20',100, 1),
-                                                    ('адыгейский', date '2022-03-15',75.90, 1),
-                                                    ('российский', date '2022-06-01',95, 1),
-                                                    ('мороженное максибом', date '2022-07-15',60, 2),
-                                                    ('мороженное экстрем', date '2022-03-05',70, 2),
-                                                    ('мороженное щербет', date '2022-08-10',90, 2),
-                                                    ('мороженное пломбир', date '2022-06-25',50, 2),
-                                                    ('амка', date '2022-05-10',80.50, 3),
-                                                    ('простоквашино', date '2022-09-11',85, 3),
-                                                    ('домик в деревне', date '2022-03-10',70, 3),
-                                                    ('кифир', date '2022-07-12',90, 3),
-                                                    ('ряженка', date '2022-08-09',90, 3);
+create trigger price_name_and_date
+	INSTEAD OF insert
+	on product_view 
+	for each row
+    execute procedure product_addition();
 
-SELECT p.name FROM product p
-JOIN type t ON p.type_id = t.id
-WHERE t.name like 'сыр';
+drop trigger price_name_and_date on product_view ;
 
-SELECT name FROM product
-WHERE name LIKE '%мороженное%';
+insert into products(name, producer, count, price) values ('11', '123', 1, 15)
 
-SELECT name FROM product
-WHERE date < current_date;
+select * from history_of_price
 
-SELECT  name, price FROM product
-WHERE price = (select max(price) from product);
-
-SELECT  t.name, count(p.name) FROM type t
-JOIN product p ON t.id=p.type_id
-GROUP BY t.name;
-
-SELECT  t.name, count(p.name) FROM type t
-JOIN product p ON t.id=p.type_id
-WHERE t.name LIKE 'сыр' OR t.name LIKE 'молоко'
-GROUP BY t.name;
-
-SELECT   t.name  FROM type t
-JOIN product p ON t.id=p.type_id
-GROUP BY t.name
-having count(t.name)<10;
-
-SELECT  p.name, t.name  FROM type t
-JOIN product p ON t.id=p.type_id;
+	

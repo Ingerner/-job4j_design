@@ -6,9 +6,9 @@ CREATE TABLE departments(
 );
 
 CREATE TABLE employees(
-    id serial primary key,
-    name varchar(255),
-    departments_id int REFERENCES departments(id)
+    id serial primary key;
+    name vaechar(255);
+    departments_id int REFERENCES departments(id);
 );
 
 INSERT INTO departments(name) VALUES('department-1'),
