@@ -105,6 +105,7 @@ $$
 $$
 LANGUAGE 'plpgsql';
 
+
 create trigger price_name_and_date
 	INSTEAD OF insert
 	on history_of_price
