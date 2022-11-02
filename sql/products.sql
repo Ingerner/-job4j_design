@@ -6,34 +6,6 @@ create table products (
     price integer
 );
 
-create or replace function discount()
-    returns trigger as
-$$
-    BEGIN
-        update products
-        set price = price - price * 0.2
-        where count <= 5 AND id = new.id;
-        return NEW;
-    END;
-$$
-LANGUAGE 'plpgsql';
-
-create trigger discount_trigger
-    after insert
-    on products
-    for each row
-    execute procedure discount();
-	
-	
-insert into products (name, producer, count, price) VALUES ('product_3', 'producer_3', 8, 115);
-	
-select * from products;
-	
-insert into products (name, producer, count, price) VALUES ('product_1', 'producer_1', 3, 50);
-	
-alter table products disable trigger discount_trigger;
-
-delete from products;
 
 -- триггер 1 --
   
@@ -48,13 +20,16 @@ $$
     END;
 $$
 LANGUAGE 'plpgsql';
-	
+
+--//--------------------------------//--
 
 create trigger tax_stat
 	 AFTER insert on products
 	 referencing new table as inserted
 	 for each statement
    	 execute procedure tax_with_price();
+
+--//--------------------------------//--
 	 
 insert into products (name, producer, count, price) VALUES ('product_1', 'producer_1', 3, 50);
 	
@@ -74,6 +49,8 @@ $$
 $$
 LANGUAGE 'plpgsql';
 
+--//--------------------------------//--
+
 create trigger tax_with_price_row
     BEFORE insert
     on products
@@ -85,6 +62,7 @@ insert into products (name, producer, count, price) VALUES ('product_3', 'produc
 select * from products;
 
 -- триггер 3 --
+
 create view product_view as select * from products
 
 create table history_of_price (
@@ -94,26 +72,31 @@ create table history_of_price (
     date timestamp
 );
 
+create view product_view as select * from products;
+
+--//--------------------------------//--
+
 create or replace function product_addition()
     returns trigger as
 $$
     BEGIN
-        insert into history_of_price(name, price)
-		values (new.name, new.price);
-		return price_name_and_date;
+        insert into history_of_price(name, price, date)
+		values (new.name, new.price, CURRENT_TIMESTAMP);
+		return NEW;
     END;
 $$
 LANGUAGE 'plpgsql';
 
+--//--------------------------------//--
+
 create trigger price_name_and_date
 	INSTEAD OF insert
-	on product_view 
+	on product_view
 	for each row
     execute procedure product_addition();
 
-drop trigger price_name_and_date on product_view ;
-
-insert into products(name, producer, count, price) values ('11', '123', 1, 15)
+--//-------------------------------//--
+insert into product_view (name, producer, count, price) values ('product_4', 'producer_4', 6, 100);
 
 select * from history_of_price
 
