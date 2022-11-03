@@ -41,24 +41,26 @@ create or replace function tax_row()
     returns trigger as
 $$
     BEGIN
-        update products
-        set price = price + price * 0.2
-        where id = new.id;
+       price = new.price + new.price * 0.2;
         return NEW;
     END;
 $$
 LANGUAGE 'plpgsql';
 
---//--------------------------------//--
+--//---------------------------------//--
 
 create trigger tax_with_price_row
     BEFORE insert
     on products
     for each row
     execute procedure tax_row();
-	
+
+--//------------------------------//--
+delete  from products;
+--//------------------------------//--
+insert into products (name, producer, count, price) VALUES ('product_1', 'producer_1', 3, 50);
 insert into products (name, producer, count, price) VALUES ('product_3', 'producer_3', 8, 115);
-	
+--//-----------------------------//--
 select * from products;
 
 -- триггер 3 --
