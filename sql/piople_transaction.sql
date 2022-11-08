@@ -4,8 +4,6 @@ create table human(
 	age integer
 );
 
-delete from human;
-
 insert into human(last_name, first_name, age) values('Sergey', 'Petrov', 30);
 insert into human(last_name, first_name, age) values('Andrey', 'Ivanov', 25);
 insert into human(last_name, first_name, age) values('Ivan', 'Sidorov', 35);
