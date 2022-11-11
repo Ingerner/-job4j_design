@@ -28,7 +28,7 @@ insert into products (name, count, price) VALUES ('product_20', 20, 100);
 
 begin;
 DECLARE cursor_products SCROLL cursor for select * from products;
-MOVE FORWARD 21 FROM cursor_products;
+FETCH LAST FROM cursor_products;
 FETCH PRIOR  FROM cursor_products;
 close cursor_products;
 commit;
