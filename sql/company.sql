@@ -30,12 +30,9 @@ insert into person(id, name,  company_id) values(5, 'Olga', 5);
 insert into person(id, name,  company_id) values(6, 'Aleksandr', 2);
 insert into person(id, name,  company_id) values(7, 'Matvey', 4);
 
-select p.name from person p left join company c
+select c.name as company, p.name as person from person p left join company c
 on p.company_id=c.id
 where c.id != 5;
-
-select c.name as company, p.name as person from person p left join company c
-on p.company_id=c.id;
 
 select c.name, count(*) from person p left join company c
 on p.company_id=c.id
