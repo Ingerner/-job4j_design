@@ -37,8 +37,12 @@ where c.id != 5;
 select c.name as company, p.name as person from person p left join company c
 on p.company_id=c.id;
 
-select c.name, count(p.name) from person p left join company c
+select c.name, count(*) from person p left join company c
 on p.company_id=c.id
-GROUP BY c.name;
+GROUP BY c.name
+HAVING COUNT(*) = (select COUNT(*) from person
+GROUP BY company_id
+ORDER BY 1 DESC LIMIT 1);
+
 
 
