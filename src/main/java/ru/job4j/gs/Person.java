@@ -1,4 +1,4 @@
-package ru.job4j.memory_structure;
+package ru.job4j.gs;
 
 public class Person {
 
