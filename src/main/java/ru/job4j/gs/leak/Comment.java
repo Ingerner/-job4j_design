@@ -4,9 +4,9 @@ public class Comment {
 
     private String text;
 
-    private String user;
+    private User user;
 
-    public Comment(String text, String user) {
+    public Comment(String text, User user) {
         this.text = text;
         this.user = user;
     }
@@ -19,11 +19,11 @@ public class Comment {
         this.text = text;
     }
 
-    public String getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(String user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
