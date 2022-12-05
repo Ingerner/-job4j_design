@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class PostStore {
 
-    private static Map<Integer,Post> posts = new HashMap<>();
+    private static Map<Integer, Post> posts = new HashMap<>();
 
     private AtomicInteger atomicInteger = new AtomicInteger(1);
 
