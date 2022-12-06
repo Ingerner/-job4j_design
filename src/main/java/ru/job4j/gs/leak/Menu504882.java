@@ -4,10 +4,10 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Menu504882 {
-    public static final Integer ADD_POST = 1;
-    public static final Integer ADD_MANY_POST = 2;
-    public static final Integer SHOW_ALL_POSTS = 3;
-    public static final Integer DELETE_POST = 4;
+    public static final int ADD_POST = 1;
+    public static final int ADD_MANY_POST = 2;
+    public static final int SHOW_ALL_POSTS = 3;
+    public static final int DELETE_POST = 4;
 
     public static final String SELECT = "Выберете меню";
     public static final String COUNT = "Выберете количество создаваемых постов";
