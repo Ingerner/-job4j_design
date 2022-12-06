@@ -20,4 +20,16 @@ public class TestHash {
         rezult = 31 * rezult + surname.hashCode();
         return rezult;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof TestHash)) {
+            return false;
+        }
+        TestHash testHash = (TestHash) o;
+        return age == testHash.age && Objects.equals(name, testHash.name) && Objects.equals(surname, testHash.surname);
+    }
 }

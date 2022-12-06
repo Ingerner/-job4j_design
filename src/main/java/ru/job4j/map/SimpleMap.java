@@ -119,6 +119,18 @@ public class SimpleMap<K, V> implements Map<K, V> {
         K key;
         V value;
 
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (!(o instanceof MapEntry))  {
+                return false;
+            }
+            MapEntry<?, ?> mapEntry = (MapEntry<?, ?>) o;
+            return Objects.equals(key, mapEntry.key);
+        }
+
         public MapEntry(K key, V value) {
             this.key = key;
             this.value = value;
@@ -129,4 +141,6 @@ public class SimpleMap<K, V> implements Map<K, V> {
             return key.hashCode();
         }
     }
+
+
 }
