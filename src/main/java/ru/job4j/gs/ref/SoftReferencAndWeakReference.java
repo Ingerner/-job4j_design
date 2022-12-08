@@ -28,7 +28,6 @@ public class SoftReferencAndWeakReference {
         return true;
     }
 
-
     public void   weakReference(WeakReference<List<String>> list) {
        List<String> link  = list.get();
        if (link != null) {
