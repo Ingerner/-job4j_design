@@ -16,6 +16,7 @@ public class WeakDemo {
     /**
      * Применение типа ссылок  WeakReference.
      */
+
     private static void example1() throws InterruptedException {
         Object object = new Object() {
             @Override

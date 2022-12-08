@@ -17,6 +17,7 @@ public class StrongDemo {
     /**
      * Тип ссылок Strong.
      */
+
     private static void example1() throws InterruptedException {
         Object[] objects = new Object[100];
         for (int i = 0; i < 100; i++) {
