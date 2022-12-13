@@ -1,4 +1,6 @@
-package ru.job4j.gs.cache;
+package ru.job4j.gs.cache.menu;
+
+import ru.job4j.gs.cache.DirFileCache;
 
 import java.io.IOException;
 import java.util.Scanner;
