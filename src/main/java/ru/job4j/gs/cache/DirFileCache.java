@@ -17,8 +17,8 @@ public class DirFileCache extends AbstractCache<String, String> {
        String read = null;
         try {
             read = Files.readString(Paths.get(cachingDir, key));
-        } catch (IllegalArgumentException | IOException e) {
-            System.out.print("файл " + key  + " не найден");
+        } catch (IOException e) {
+            throw new IllegalArgumentException();
         }
         return read;
     }
