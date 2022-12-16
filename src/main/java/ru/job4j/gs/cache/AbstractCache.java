@@ -13,7 +13,7 @@ public abstract class AbstractCache<K, V> {
 
     }
 
-    public V get(K key) throws IOException {
+    public V get(K key)  {
         V rezul = cache.getOrDefault(key, new SoftReference<>(null)).get();
         if (rezul == null) {
             rezul = load(key);
@@ -22,5 +22,5 @@ public abstract class AbstractCache<K, V> {
         return rezul;
     }
 
-    protected abstract V load(K key) throws IOException;
+    protected abstract V load(K key);
 }
