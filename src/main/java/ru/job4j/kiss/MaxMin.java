@@ -17,8 +17,8 @@ public class MaxMin {
         T rezult = null;
         if (!value.isEmpty()) {
              rezult = value.get(0);
-            for (int i = 0; i < value.size() - 1; i++) {
-                rezult = comparator.compare(rezult, value.get(i)) > 0 ? rezult : value.get(i);
+            for (T i : value) {
+                rezult = comparator.compare(rezult, i) > 0 ? rezult : i;
             }
         }
         return rezult;
