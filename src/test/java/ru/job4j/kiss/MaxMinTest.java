@@ -11,20 +11,20 @@ import static org.assertj.core.api.Assertions.*;
 
 class MaxMinTest {
 
-    private List<Integer> list = List.of(1, 2, 5, 3, 4);
+    private List<Integer> list = List.of(10, 2, 5, 1, -40, 40);
     Comparator<Integer> comp = (left, right) -> Integer.compare(left, right);
 
     @Test
     void maxTest() {
         Integer rezult = new MaxMin().max(list, comp);
-        Integer expected = 5;
+        Integer expected = 40;
         assertThat(rezult).isEqualTo(expected);
     }
 
     @Test
     void minTest() {
         Integer rezult = new MaxMin().min(list, comp);
-        Integer expected = 1;
+        Integer expected = -40;
         assertThat(rezult).isEqualTo(expected);
     }
 }
