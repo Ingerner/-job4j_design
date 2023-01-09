@@ -25,8 +25,7 @@ public class GeneratorLibraryTest {
     public void whenTheTemplateHasKeysThatAreNotInTheMapWeThrowAnException() {
         Generator generator = new GeneratorLibrary();
         Map<String, String> map = new HashMap<>();
-        map.put("name1", "Petr Arsentev");
-        map.put("subject1 ", "you");
+        map.put("name", "Petr Arsentev");
         assertThatThrownBy(() -> generator.produce("I am a ${name}, Who are ${subject}? ", map)).
                 isInstanceOf(IllegalArgumentException.class);
     }
@@ -37,10 +36,7 @@ public class GeneratorLibraryTest {
         Map<String, String> map = new HashMap<>();
         map.put("name", "Petr Arsentev");
         map.put("subject ", "you");
-        map.put("key", "");
-        assertThatThrownBy(() -> generator.produce("I am a ${name}, Who are ${subject}? ", map)).
+        assertThatThrownBy(() -> generator.produce("I am a ${name}", map)).
                 isInstanceOf(IllegalArgumentException.class);
     }
-
-
 }
