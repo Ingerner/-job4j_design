@@ -7,6 +7,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 @Disabled("Тесты отключены. Удалить аннотацию после реализации всех методов по заданию.")
@@ -54,6 +55,16 @@ public class Cinema3DTest {
         Calendar date = Calendar.getInstance();
         Ticket ticket = cinema.buy(account, 1, 1, date);
         assertThatThrownBy(() -> cinema.buy(account, 1, 1, date)).
-                isInstanceOf(RuntimeException.class);
+                isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    public void whenBuyingTicketIsNotAValidDate() {
+        Account account = new AccountCinema();
+        Cinema cinema = new Cinema3D();
+        Calendar date = new GregorianCalendar(2017, -1, 35);
+        Ticket ticket = cinema.buy(account, 1, 1, date);
+        assertThatThrownBy(() -> cinema.buy(account, 1, 1, date)).
+                isInstanceOf(IllegalArgumentException.class);
     }
 }
