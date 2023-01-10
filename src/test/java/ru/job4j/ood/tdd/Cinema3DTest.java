@@ -63,7 +63,6 @@ public class Cinema3DTest {
         Account account = new AccountCinema();
         Cinema cinema = new Cinema3D();
         Calendar date = new GregorianCalendar(2017, -1, 35);
-        Ticket ticket = cinema.buy(account, 1, 1, date);
         assertThatThrownBy(() -> cinema.buy(account, 1, 1, date)).
                 isInstanceOf(IllegalArgumentException.class);
     }
