@@ -1,11 +1,11 @@
 package ru.job4j.srp;
 
-/*  * Автопарк.
+/** Автопарк.
  * Нарушение правил SRP каждый класс должен иметь обну ответственность.
- *  Данном случаи класс имеет несколько ответственносте, и и более одной присины для изменения.
+ *  Данном случаи класс имеет несколько ответственностей, и более одной причины для изменения.
  */
 
-/* @author OlegKorotkiy
+/** @author OlegKorotkiy
  * @version 1.0
  * @since 18.01.2023
  */
@@ -33,7 +33,7 @@ public class CarPark {
         return driverName;
     }
 
-    void carsOnRoute() {
-
+    public void carsOnRoute() {
+        System.out.println(carName + " " +yearIssue + " " + driverName);
     }
 }
