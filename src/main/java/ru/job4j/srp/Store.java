@@ -1,6 +1,14 @@
 package ru.job4j.srp;
 
-import ru.job4j.list.List;
+/** Магазин.
+ * Нарушение правил SRP каждый класс должен иметь обну ответственность.
+ *  Необходимо выделить абстракции для удаления и вывода информации.
+ */
+
+/** @author OlegKorotkiy
+ * @version 1.0
+ * @since 18.01.2023
+ */
 
 import java.util.ArrayList;
 
@@ -36,7 +44,7 @@ public class Store {
             }
         }
         for (Store store: list) {
-            System.out.println(store.getNameGoods() +" " +store.getArticle());
+            System.out.println(store.getNameGoods() + " " + store.getArticle());
 
         }
     }
