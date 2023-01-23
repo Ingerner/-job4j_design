@@ -31,6 +31,17 @@ public class Store {
         return article;
     }
 
+    public boolean deleteArticle(List<Store> list, int article) {
+        boolean rsl = false;
+        for (int i = 0; i < list.size(); i++) {
+            if (article == list.get(i).getArticle()) {
+                list.remove(i);
+                rsl = true;
+            }
+        }
+        return rsl;
+    }
+
     public void printArticle(List<Store> list) {
         for (Store store: list) {
             System.out.println(store.getArticle());
@@ -45,11 +56,8 @@ public class Store {
         list.add(goods1);
         list.add(goods2);
         list.add(goods3);
-        for (int i = 0; i < list.size(); i++) {
-            if (8612 == list.get(i).getArticle()) {
-                list.remove(i);
-            }
+        if (goods3.deleteArticle(list, 8612)) {
+            goods3.printArticle(list);
         }
-        goods3.printArticle(list);
     }
 }
