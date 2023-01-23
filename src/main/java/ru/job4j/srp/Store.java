@@ -11,6 +11,7 @@ package ru.job4j.srp;
  */
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Store {
 
@@ -30,6 +31,12 @@ public class Store {
         return article;
     }
 
+    public void printArticle(List<Store> list) {
+        for (Store store: list) {
+            System.out.println(store.getArticle());
+        }
+    }
+
     public static void main(String[] args) {
         ArrayList<Store> list = new ArrayList<>();
         Store goods1 = new Store("Milk", 4546);
@@ -43,9 +50,6 @@ public class Store {
                 list.remove(i);
             }
         }
-        for (Store store: list) {
-            System.out.println(store.getNameGoods() + " " + store.getArticle());
-
-        }
+        goods3.printArticle(list);
     }
 }
