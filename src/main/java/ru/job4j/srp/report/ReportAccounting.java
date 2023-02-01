@@ -14,20 +14,22 @@ public class ReportAccounting implements Report {
 
     private final Store store;
     private final DateTimeParser<Calendar> dateTimeParser;
+    private final InMemoryCurrencyConverter currencyConverter;
 
-    public ReportAccounting(Store store, DateTimeParser<Calendar> dateTimeParser) {
+    public ReportAccounting(Store store, DateTimeParser<Calendar> dateTimeParser,
+                            InMemoryCurrencyConverter currencyConverter) {
         this.store = store;
         this.dateTimeParser = dateTimeParser;
+        this.currencyConverter = currencyConverter;
     }
 
     @Override
     public String generate(Predicate<Employee> filter) {
-        InMemoryCurrencyConverter conv = new InMemoryCurrencyConverter();
         StringBuilder text = new StringBuilder();
         text.append("Name; Hired; Fired; Salary;")
                 .append(System.lineSeparator());
         for (Employee employee : store.findBy(filter)) {
-            employee.setSalary(conv.convert(Currency.USD, employee.getSalary(), Currency.RUB));
+            employee.setSalary(currencyConverter.convert(Currency.USD, employee.getSalary(), Currency.RUB));
             text.append(employee.getName()).append(" ")
                     .append(dateTimeParser.parse(employee.getHired())).append(" ")
                     .append(dateTimeParser.parse(employee.getFired())).append(" ")
