@@ -7,6 +7,7 @@ import ru.job4j.srp.store.Store;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.function.Predicate;
 /**
  * Отдел HR попросил выводить сотрудников в порядке
@@ -24,7 +25,7 @@ public class ReporHr implements Report {
     }
 
     public static void sort (ArrayList<Employee> employees) {
-        employees.sort((o1, o2) -> o2.getSalary().compareTo(o2.getSalary()));
+        employees.sort(Comparator.comparing(Employee::getSalary).reversed());
     }
 
     @Override
