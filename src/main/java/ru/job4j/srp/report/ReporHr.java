@@ -43,17 +43,5 @@ public class ReporHr implements Report {
         }
         return text.toString();
     }
-
-    public static void main(String[] args) {
-        MemStore store = new MemStore();
-        Calendar now = Calendar.getInstance();
-        Employee worker1 = new Employee("Ivan", now, now, 100);
-        Employee worker2 = new Employee("Max", now, now, 200);
-        store.add(worker1);
-        store.add(worker2);
-        ReporHr hr = new ReporHr(store);
-        System.out.println(hr.generate(em-> true));
-
-    }
 }
 

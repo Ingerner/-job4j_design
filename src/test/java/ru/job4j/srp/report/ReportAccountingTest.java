@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.*;
 
-class ReportAccountingTest {
+public class ReportAccountingTest {
     @Test
     public void whenTheReportForAccountantsWasGenerated() {
         MemStore store = new MemStore();
@@ -23,7 +23,6 @@ class ReportAccountingTest {
         InMemoryCurrencyConverter conv = new InMemoryCurrencyConverter();
         store.add(worker);
         Report engine = new ReportAccounting(store, parser, conv);
-        TimeUnit currencyConverter;
         StringBuilder expect = new StringBuilder()
                 .append("Name; Hired; Fired; Salary;")
                 .append(System.lineSeparator())
