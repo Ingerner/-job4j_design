@@ -11,5 +11,5 @@ public interface Store {
 
     List<Employee> findBy(Predicate<Employee> filter);
 
-    void sort (ArrayList<Employee> employees);
+    void sort(ArrayList<Employee> employees);
 }

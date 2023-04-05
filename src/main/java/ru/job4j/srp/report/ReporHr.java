@@ -25,7 +25,7 @@ public class ReporHr implements Report {
         this.store = store;
     }
 
-    public static void sort (List<Employee> employees) {
+    public static void sort(List<Employee> employees) {
          employees.sort(Comparator.comparing(Employee::getSalary).reversed());
     }
 
